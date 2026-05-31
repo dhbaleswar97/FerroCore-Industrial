@@ -14,6 +14,12 @@ const FOOTER_LINKS = {
     { label: "Aerospace", href: "/solutions/aerospace" },
     { label: "Energy", href: "/solutions/energy" },
   ],
+  Resources: [
+    { label: "User Manual", href: "/guide" },
+    { label: "System Guide", href: "/guide" },
+    { label: "Documentation", href: "/guide" },
+    { label: "Platform Walkthrough", href: "/guide" },
+  ],
   Company: [
     { label: "About", href: "/about" },
     { label: "Blog", href: "/blog" },
@@ -32,7 +38,7 @@ export function MarketingFooter() {
   return (
     <footer className="border-t border-border bg-surface">
       <div className="container py-16">
-        <div className="grid gap-10 lg:grid-cols-5">
+        <div className="grid gap-10 lg:grid-cols-6">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2.5">

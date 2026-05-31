@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { Package, Warehouse, Truck, AlertTriangle } from "lucide-react";
+import { Package, Warehouse, Truck, AlertTriangle, X } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MOCK_INVENTORY, MOCK_WAREHOUSES } from "@/data/mock-inventory";
+import { MOCK_INVENTORY, MOCK_WAREHOUSES, MOCK_PRODUCTS } from "@/data/mock-inventory";
 import { formatCurrency } from "@/lib/utils";
 import { ROUTES } from "@/constants/app";
+import { useState } from "react";
 
 const outOfStock = MOCK_INVENTORY.filter((i) => i.stockStatus === "out_of_stock").length;
 const lowStock = MOCK_INVENTORY.filter((i) => i.stockStatus === "low_stock").length;
@@ -18,9 +19,50 @@ const STATS = [
   { label: "Out of Stock", value: String(outOfStock), icon: Truck, href: ROUTES.inventory.products, color: "text-destructive" },
 ];
 
+const LOW_STOCK_ITEMS = MOCK_INVENTORY
+  .filter((i) => i.stockStatus === "low_stock" || i.stockStatus === "out_of_stock")
+  .map((i) => {
+    const product = MOCK_PRODUCTS.find((p) => p.id === i.productId);
+    return { ...i, productName: product?.name ?? "Unknown" };
+  });
+
 export function InventoryOverview() {
+  const [alertDismissed, setAlertDismissed] = useState(false);
+
   return (
     <div className="space-y-8">
+      {/* Low-stock alert */}
+      {!alertDismissed && LOW_STOCK_ITEMS.length > 0 && (
+        <div className="flex items-start gap-3 rounded-xl border border-warning/30 bg-warning/8 p-4">
+          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-warning">
+              {LOW_STOCK_ITEMS.filter((i) => i.stockStatus === "out_of_stock").length > 0
+                ? `${LOW_STOCK_ITEMS.filter((i) => i.stockStatus === "out_of_stock").length} item(s) out of stock · `
+                : ""}
+              {LOW_STOCK_ITEMS.filter((i) => i.stockStatus === "low_stock").length} item(s) running low
+            </p>
+            <p className="mt-0.5 text-xs text-warning/70">
+              {LOW_STOCK_ITEMS.map((i) => i.productName).join(" · ")}
+            </p>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <Link
+              href={ROUTES.inventory.products}
+              className="text-xs font-semibold text-warning hover:underline"
+            >
+              View
+            </Link>
+            <button
+              onClick={() => setAlertDismissed(true)}
+              className="rounded p-0.5 text-warning/60 hover:text-warning"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="flex items-center justify-between">
         <div>
           <h1 className="font-display text-2xl font-bold lg:text-3xl">Inventory</h1>

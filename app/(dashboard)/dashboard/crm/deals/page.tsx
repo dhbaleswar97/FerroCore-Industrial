@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { DealsTable } from "@/features/crm/deals-table";
+import { DealsPipeline } from "@/features/crm/deals-pipeline";
 
 export const metadata: Metadata = { title: "Deals" };
 
 export default function DealsPage() {
-  return <DealsTable />;
+  return <DealsPipeline />;
 }

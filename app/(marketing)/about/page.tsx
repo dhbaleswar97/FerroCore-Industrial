@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 const TIMELINE = [
@@ -14,10 +14,10 @@ const TIMELINE = [
 ];
 
 const TEAM = [
-  { name: "Marcus Steel", title: "CEO & Co-Founder", bio: "20+ years in commodity trading. Former head of steel procurement at a Fortune 500 industrial conglomerate.", avatar: "https://ui-avatars.com/api/?name=Marcus+Steel&background=F76C46&color=fff&size=80" },
-  { name: "Diana Forge", title: "COO", bio: "Supply chain expert. Designed logistics operations for $500M+ trade volumes across 3 continents.", avatar: "https://ui-avatars.com/api/?name=Diana+Forge&background=3D55FD&color=fff&size=80" },
-  { name: "Ryan Alloy", title: "Head of Sales", bio: "Enterprise account management specialist with 150+ institutional client relationships globally.", avatar: "https://ui-avatars.com/api/?name=Ryan+Alloy&background=C6AF88&color=000&size=80" },
-  { name: "Sofia Cast", title: "Head of Operations", bio: "Industrial engineer turned operations leader — built our warehouse infrastructure from the ground up.", avatar: "https://ui-avatars.com/api/?name=Sofia+Cast&background=85A1C5&color=fff&size=80" },
+  { name: "Marcus Steel", title: "CEO & Co-Founder", bio: "20+ years in commodity trading. Former head of steel procurement at a Fortune 500 industrial conglomerate.", avatar: "https://ui-avatars.com/api/?name=Marcus+Steel&background=F76C46&color=fff&size=80", linkedin: "https://linkedin.com" },
+  { name: "Diana Forge", title: "COO", bio: "Supply chain expert. Designed logistics operations for $500M+ trade volumes across 3 continents.", avatar: "https://ui-avatars.com/api/?name=Diana+Forge&background=3D55FD&color=fff&size=80", linkedin: "https://linkedin.com" },
+  { name: "Ryan Alloy", title: "Head of Sales", bio: "Enterprise account management specialist with 150+ institutional client relationships globally.", avatar: "https://ui-avatars.com/api/?name=Ryan+Alloy&background=C6AF88&color=000&size=80", linkedin: "https://linkedin.com" },
+  { name: "Sofia Cast", title: "Head of Operations", bio: "Industrial engineer turned operations leader — built our warehouse infrastructure from the ground up.", avatar: "https://ui-avatars.com/api/?name=Sofia+Cast&background=85A1C5&color=fff&size=80", linkedin: "https://linkedin.com" },
 ];
 
 export default function AboutPage() {
@@ -123,9 +123,48 @@ export default function AboutPage() {
                 <h3 className="font-display font-bold">{member.name}</h3>
                 <p className="text-xs text-brand-ember font-semibold mt-0.5">{member.title}</p>
                 <p className="mt-3 text-xs text-muted-foreground leading-relaxed">{member.bio}</p>
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-brand-cobalt transition-colors"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" /> LinkedIn
+                </a>
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+      {/* Bottom CTA */}
+      <section className="py-24 px-6 border-t border-border">
+        <div className="container mx-auto max-w-4xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="font-display text-4xl font-black">
+              Ready to work with us?
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
+              Join 150+ enterprise clients who trust FerroCore to power their industrial supply chains. Start your free trial or speak with our team today.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <Link
+                href="/auth/register"
+                className="inline-flex items-center gap-2 rounded-full bg-brand-ember px-8 py-3.5 text-sm font-bold text-white shadow-brand transition-all hover:scale-[1.03] hover:bg-brand-ember/90"
+              >
+                Start Free Trial <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-full border border-border px-8 py-3.5 text-sm font-medium transition-all hover:bg-muted"
+              >
+                Get in Touch
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

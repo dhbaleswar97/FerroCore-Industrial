@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { HeroSection } from "@/components/marketing/hero-section";
 import { StatsSection } from "@/components/marketing/stats-section";
 import { SupplyChainSection } from "@/components/marketing/supply-chain-section";
@@ -37,7 +38,9 @@ export default function HomePage() {
       <ProcurementSection />
       <WhyFerrocoreSection />
       <TestimonialsSection />
-      <ContactSection />
+      <Suspense fallback={<div className="py-24" />}>
+        <ContactSection />
+      </Suspense>
       <CtaSection />
     </>
   );

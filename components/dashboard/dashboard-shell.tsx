@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { useUIStore } from "@/store/ui-store";
 import { Sidebar } from "./sidebar";
 import { DashboardNavbar } from "./navbar";
+import { CommandPalette } from "./command-palette";
 
 interface DashboardShellProps {
   children: React.ReactNode;
@@ -44,6 +45,8 @@ export function DashboardShell({ children }: DashboardShellProps) {
         <DashboardNavbar />
         <div className="px-4 py-6 lg:px-6 lg:py-8">{children}</div>
       </main>
+
+      <CommandPalette />
     </div>
   );
 }

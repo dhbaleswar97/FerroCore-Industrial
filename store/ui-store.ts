@@ -15,6 +15,7 @@ interface UIState {
   setSidebarMobileOpen: (open: boolean) => void;
   toggleSidebarMobile: () => void;
   setCommandPaletteOpen: (open: boolean) => void;
+  toggleCommandPalette: () => void;
   openModal: (id: string) => void;
   closeModal: () => void;
   openSheet: (id: string) => void;
@@ -37,6 +38,7 @@ export const useUIStore = create<UIState>()(
       setSidebarMobileOpen: (open) => set({ sidebarMobileOpen: open }),
       toggleSidebarMobile: () => set((s) => ({ sidebarMobileOpen: !s.sidebarMobileOpen })),
       setCommandPaletteOpen: (open) => set({ commandPaletteOpen: open }),
+      toggleCommandPalette: () => set((s) => ({ commandPaletteOpen: !s.commandPaletteOpen })),
       openModal: (id) => set({ activeModal: id }),
       closeModal: () => set({ activeModal: null }),
       openSheet: (id) => set({ activeSheet: id }),

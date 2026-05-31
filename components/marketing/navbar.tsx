@@ -22,9 +22,10 @@ const TOP_LINKS = [
 
 // Compact items shown in the floating pill
 const PILL_LINKS = [
-  { href: "/home",     label: "Home",     Icon: Home    },
-  { href: "/products", label: "Products", Icon: Package },
-  { href: "/contact",  label: "Contact",  Icon: Mail    },
+  { href: "/home",      label: "Home",      Icon: Home    },
+  { href: "/products",  label: "Products",  Icon: Package },
+  { href: "/solutions", label: "Solutions", Icon: Layers  },
+  { href: "/contact",   label: "Contact",   Icon: Mail    },
 ];
 
 // All items shown in the overlay menu (with big typography)
@@ -100,7 +101,7 @@ export function MarketingNavbar() {
 
   // Scroll detection
   useEffect(() => {
-    const THRESHOLD   = 80;   // px — start tracking direction after this
+    const THRESHOLD   = 100;  // px — start tracking direction after this
     const SENSITIVITY = 6;    // px — minimum delta to trigger state change
 
     const handler = () => {
@@ -110,6 +111,7 @@ export function MarketingNavbar() {
       setScrolled(y > 20);
 
       if (y <= THRESHOLD) {
+        // Always show top nav when near the top; pill only shows when top is hidden
         setTopHidden(false);
       } else if (delta > SENSITIVITY) {
         setTopHidden(true);    // scrolling down → hide top, show pill

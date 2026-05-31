@@ -70,7 +70,7 @@ export function LoginForm() {
           <input type="checkbox" className="rounded border-border" {...register("rememberMe")} />
           Remember me
         </label>
-        <a href="#" className="text-brand-ember hover:underline">
+        <a href="/auth/forgot-password" className="text-brand-ember hover:underline">
           Forgot password?
         </a>
       </div>

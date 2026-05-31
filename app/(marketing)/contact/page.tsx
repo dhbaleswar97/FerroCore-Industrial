@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { ContactSection } from "@/components/marketing/contact-section";
 
 export const metadata: Metadata = {
@@ -20,7 +21,9 @@ export default function ContactPage() {
           </h1>
         </div>
       </div>
-      <ContactSection />
+      <Suspense fallback={<div className="py-24" />}>
+        <ContactSection />
+      </Suspense>
     </div>
   );
 }

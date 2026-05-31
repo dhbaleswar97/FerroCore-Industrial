@@ -1,0 +1,9 @@
+# Skip files Vercel doesn't need
+.git
+.github
+*.md
+*.log
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
